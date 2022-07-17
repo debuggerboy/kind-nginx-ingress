@@ -47,10 +47,18 @@ Install Nginx Ingress Controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
 
+wait for the Nginx Ingress Controller to star process requests running:
+
+```
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=90s
+```
+
 # Environment
 
-Create a sample micro-services environment.
-
+Create a sample micro-services environment. Clone this repo and execute below commands from the git directory.
 
 ```
 kubectl apply -f main-app.yaml
